@@ -1,0 +1,26 @@
+.btn {
+  box-sizing: border-box;
+  position: relative;
+  border-radius: 2px;
+}
+
+.btn:hover {
+  cursor: pointer;
+}
+
+.primary {
+  min-width: 251px;
+  min-height: 50px;
+  background: #ffffff;
+  border: 1px solid #dfe5ec;
+  color: #000000;
+  line-height: 20px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  max-width: 100%;
+}
+
+.primary__active {
+  background: #2196f3;
+  color: #ffffff;
+}
