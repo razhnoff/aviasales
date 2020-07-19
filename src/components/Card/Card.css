@@ -1,0 +1,59 @@
+.card_container {
+  width: 100%;
+  background: #ffffff;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  margin: 20px 0;
+  padding: 20px 0;
+}
+
+.price {
+  font-size: 24px;
+  line-height: 24px;
+  color: #2196f3;
+}
+
+.col_title {
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #a0b0b9;
+  font-size: 12px;
+  line-height: 18px;
+}
+
+.col_data {
+  color: #4a4a4a;
+  font-size: 14px;
+  line-height: 21px;
+}
+
+.main_info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 50px 0 20px;
+}
+
+.additional_info {
+  max-width: 462px;
+  margin: 20px 20px 0 20px;
+}
+
+.company_logo {
+  margin-right: 11px;
+}
+
+.row_titles,
+.row_data {
+  display: flex;
+  justify-content: space-between;
+}
+
+.col_title,
+.col_data {
+  min-width: 140px;
+}
+
+.row:not(:first-child) {
+  margin-top: 10px;
+}
