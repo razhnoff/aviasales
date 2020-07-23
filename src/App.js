@@ -23,7 +23,7 @@ class App extends Component {
     };
   }
 
-  initButtonsMeta() {
+  updateButtonsMeta() {
     this.filtersMeta = [
       {
         key: "all",
@@ -202,7 +202,7 @@ class App extends Component {
       return acc + curr.stops.length;
     }, 0);
 
-    return stopsLength === 1;
+    return stopsLength >= 1;
   };
 
   filterByTwoTransfers = ({ segments }, key, arr) => {
@@ -214,7 +214,7 @@ class App extends Component {
       return acc + curr.stops.length;
     }, 0);
 
-    return stopsLength === 2;
+    return stopsLength >= 2;
   };
 
   filterByThreeTransfers = ({ segments }, key, arr) => {
@@ -226,7 +226,7 @@ class App extends Component {
       return acc + curr.stops.length;
     }, 0);
 
-    return stopsLength === 3;
+    return stopsLength >= 3;
   };
 
   getCardViews = () => {
@@ -247,6 +247,7 @@ class App extends Component {
 
     return sortedByTime.map((ticket, key) => {
       if (key > 4) {
+        // eslint-disable-next-line array-callback-return
         return;
       }
 
@@ -255,11 +256,11 @@ class App extends Component {
   };
 
   render() {
-    this.initButtonsMeta();
+    this.updateButtonsMeta();
 
     return (
       <div className="App">
-        <div className className={"logo"}>
+        <div className={"logo"}>
           <a href={"#"} title={"logo"}>
             <img src={logo} alt={"logo"} />
           </a>

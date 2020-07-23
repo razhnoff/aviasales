@@ -1,6 +1,6 @@
-import React, { Fragment } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import { PRIMARY, PRIMARY_ACTIVE, CHECKBOX } from "../../constants";
+import { PRIMARY, PRIMARY_ACTIVE } from "../../constants";
 import "./Button.css";
 
 export const Button = ({ type, value, onClick }) => {
