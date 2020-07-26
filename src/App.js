@@ -4,83 +4,70 @@ import { Input } from "./components/Input";
 import { Card } from "./components/Card";
 import { PRIMARY_ACTIVE, PRIMARY } from "./constants";
 import logo from "./assets/Logo.png";
+import {
+  addSearchId,
+  addTickets,
+  changeSortByPriceFlag,
+  changeSortByTimeFlag,
+  addFilterBy3Transfers,
+  addFilterBy2Transfers,
+  addFilterBy1Transfer,
+  addFilterByAllTransfers,
+  addFilterByNoTransfers,
+} from "./store/actions";
 import "./App.css";
+import { connect } from "react-redux";
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      tickets: [],
-      filteredTickets: [],
-      searchId: "",
-      isSortedByPrice: false,
-      isSortedByTime: false,
-      isFilteredByNoTransfers: false,
-      isFilteredByAllTranfers: false,
-      isFilteredByOneTransfer: false,
-      isFilteredByTwoTransfers: false,
-      isFilteredByThreeTransfers: false,
-    };
-  }
-
   updateButtonsMeta() {
     this.filtersMeta = [
       {
         key: "all",
         value: "Все",
-        checked: this.state.isFilteredByAllTranfers,
+        checked: this.props.isFilteredByAllTranfers,
         onChange: () => {
-          this.setState({
-            isFilteredByAllTranfers: !this.state.isFilteredByAllTranfers,
-            isFilteredByNoTransfers: false,
+          this.props.addFilterByAllTransfers({
+            isFilteredByAllTranfers: this.props.isFilteredByAllTranfers,
           });
         },
       },
       {
         key: "no_transfer",
         value: "Без пересадок",
-        checked: this.state.isFilteredByNoTransfers,
+        checked: this.props.isFilteredByNoTransfers,
         onChange: () => {
-          this.setState({
-            isFilteredByNoTransfers: !this.state.isFilteredByNoTransfers,
-            isFilteredByAllTranfers: false,
-            isFilteredByOneTransfer: false,
-            isFilteredByTwoTransfers: false,
-            isFilteredByThreeTransfers: false,
+          this.props.addFilterByNoTransfers({
+            isFilteredByNoTransfers: this.props.isFilteredByNoTransfers,
           });
         },
       },
       {
         key: "one_transfer",
         value: "1 пересадка",
-        checked: this.state.isFilteredByOneTransfer,
+        checked: this.props.isFilteredByOneTransfer,
         onChange: () => {
-          this.setState({
-            isFilteredByOneTransfer: !this.state.isFilteredByOneTransfer,
-            isFilteredByNoTransfers: false,
-            isFiltredByAllTranfers: false,
+          this.props.addFilterBy1Transfer({
+            isFilteredByOneTransfer: this.props.isFilteredByOneTransfer,
           });
         },
       },
       {
         key: "two_transfer",
         value: "2 пересадки",
-        checked: this.state.isFilteredByTwoTransfers,
+        checked: this.props.isFilteredByTwoTransfers,
         onChange: () => {
-          this.setState({
-            isFilteredByTwoTransfers: !this.state.isFilteredByTwoTransfers,
-            isFilteredByNoTransfers: false,
+          this.props.addFilterBy2Transfers({
+            isFilteredByTwoTransfers: this.props.isFilteredByTwoTransfers,
           });
         },
       },
       {
         key: "three_transfer",
         value: "3 пересадки",
-        checked: this.state.isFilteredByThreeTransfers,
+        checked: this.props.isFilteredByThreeTransfers,
         onChange: () => {
-          this.setState({
-            isFilteredByThreeTransfers: !this.state.isFilteredByThreeTransfers,
-            isFilteredByNoTransfers: false,
+          this.props.addFilterBy3Transfers({
+            isFilteredByThreeTransfers: this.props.isFilteredByThreeTransfers,
           });
         },
       },
@@ -92,7 +79,7 @@ class App extends Component {
       const searchIdUrl = "https://front-test.beta.aviasales.ru/search";
       const response = await fetch(searchIdUrl);
       const { searchId } = await response.json();
-      this.setState({ searchId });
+      this.props.addSearchId({ searchId });
     } catch (e) {
       this.fetchSearchId();
       console.error(new Error(e));
@@ -108,9 +95,9 @@ class App extends Component {
     try {
       const ticketsUrl =
         "https://front-test.beta.aviasales.ru/tickets?searchId=";
-      const response = await fetch(ticketsUrl + this.state.searchId);
+      const response = await fetch(ticketsUrl + this.props.searchId);
       const { tickets } = await response.json();
-      this.setState({ tickets, isLoading: false, filteredTickets: tickets });
+      this.props.addTickets({ tickets });
     } catch (e) {
       this.fetchAllTickets();
       console.error(new Error(e));
@@ -129,39 +116,23 @@ class App extends Component {
     });
   };
 
-  sortByPrice = (a, b) => {
-    return a.price - b.price;
-  };
-
-  sortByTime = (prevItem, nextItem) => {
-    const prevItemTime = prevItem.segments.reduce((acc, curr) => {
-      return acc + curr.duration;
-    }, 0);
-    const nextItemTime = nextItem.segments.reduce((acc, curr) => {
-      return acc + curr.duration;
-    }, 0);
-    return prevItemTime > nextItemTime ? 1 : -1;
-  };
-
   buttonsMeta = () => {
     const FILTER_PRICE_BTN = {
-      type: this.state.isSortedByPrice ? PRIMARY_ACTIVE : PRIMARY,
+      type: this.props.isSortedByPrice ? PRIMARY_ACTIVE : PRIMARY,
       value: "Самый дешевый",
       onClick: () => {
-        this.setState({
-          isSortedByPrice: !this.state.isSortedByPrice,
-          isSortedByTime: false,
+        this.props.changeSortByPriceFlag({
+          isSortedByPrice: this.props.isSortedByPrice,
         });
       },
     };
 
     const FILTER_TIME_BTN = {
-      type: this.state.isSortedByTime ? PRIMARY_ACTIVE : PRIMARY,
+      type: this.props.isSortedByTime ? PRIMARY_ACTIVE : PRIMARY,
       value: "Самый быстрый",
       onClick: () => {
-        this.setState({
-          isSortedByTime: !this.state.isSortedByTime,
-          isSortedByPrice: false,
+        this.props.changeSortByTimeFlag({
+          isSortedByTime: this.props.isSortedByTime,
         });
       },
     };
@@ -170,7 +141,7 @@ class App extends Component {
   };
 
   filterByAllTransfers = ({ segments }, key, arr) => {
-    if (!this.state.isFilteredByAllTranfers) {
+    if (!this.props.isFilteredByAllTranfers) {
       return arr;
     }
     const emptyItem = segments.find((item) => item.stops.length === 0);
@@ -178,7 +149,7 @@ class App extends Component {
   };
 
   filterByNoTransfers = ({ segments }, key, arr) => {
-    if (!this.state.isFilteredByNoTransfers) {
+    if (!this.props.isFilteredByNoTransfers) {
       return arr;
     }
     const stopsLength = segments.reduce((acc, curr) => {
@@ -194,7 +165,7 @@ class App extends Component {
   };
 
   filterByOneTransfers = ({ segments }, key, arr) => {
-    if (!this.state.isFilteredByOneTransfer) {
+    if (!this.props.isFilteredByOneTransfer) {
       return arr;
     }
 
@@ -206,7 +177,7 @@ class App extends Component {
   };
 
   filterByTwoTransfers = ({ segments }, key, arr) => {
-    if (!this.state.isFilteredByTwoTransfers) {
+    if (!this.props.isFilteredByTwoTransfers) {
       return arr;
     }
 
@@ -218,7 +189,7 @@ class App extends Component {
   };
 
   filterByThreeTransfers = ({ segments }, key, arr) => {
-    if (!this.state.isFilteredByThreeTransfers) {
+    if (!this.props.isFilteredByThreeTransfers) {
       return arr;
     }
 
@@ -230,19 +201,19 @@ class App extends Component {
   };
 
   getCardViews = () => {
-    const filteredTickets = this.state.tickets
+    const filteredTickets = this.props.tickets
       .filter(this.filterByNoTransfers)
       .filter(this.filterByAllTransfers)
       .filter(this.filterByThreeTransfers)
       .filter(this.filterByTwoTransfers)
       .filter(this.filterByOneTransfers);
 
-    const sortedByPrice = this.state.isSortedByPrice
-      ? [...filteredTickets].sort(this.sortByPrice)
+    const sortedByPrice = this.props.isSortedByPrice
+      ? [...filteredTickets].sort(sortByPrice)
       : [...filteredTickets];
 
-    const sortedByTime = this.state.isSortedByTime
-      ? [...sortedByPrice].sort(this.sortByTime)
+    const sortedByTime = this.props.isSortedByTime
+      ? [...sortedByPrice].sort(sortByTime)
       : [...sortedByPrice];
 
     return sortedByTime.map((ticket, key) => {
@@ -257,7 +228,6 @@ class App extends Component {
 
   render() {
     this.updateButtonsMeta();
-
     return (
       <div className="App">
         <div className={"logo"}>
@@ -280,4 +250,65 @@ class App extends Component {
   }
 }
 
-export default App;
+const sortByPrice = (a, b) => {
+  return a.price - b.price;
+};
+
+const sortByTime = (prevItem, nextItem) => {
+  const prevItemTime = prevItem.segments.reduce((acc, curr) => {
+    return acc + curr.duration;
+  }, 0);
+  const nextItemTime = nextItem.segments.reduce((acc, curr) => {
+    return acc + curr.duration;
+  }, 0);
+  return prevItemTime > nextItemTime ? 1 : -1;
+};
+
+const mapStateToProps = (state) => {
+  const {
+    searchId,
+    tickets,
+    isSortedByPrice,
+    isSortedByTime,
+    isFilteredByNoTransfers,
+    isFilteredByAllTranfers,
+    isFilteredByOneTransfer,
+    isFilteredByTwoTransfers,
+    isFilteredByThreeTransfers,
+  } = state;
+
+  return {
+    searchId,
+    tickets,
+    isSortedByPrice,
+    isSortedByTime,
+    isFilteredByNoTransfers,
+    isFilteredByAllTranfers,
+    isFilteredByOneTransfer,
+    isFilteredByTwoTransfers,
+    isFilteredByThreeTransfers,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addSearchId: ({ searchId }) => dispatch(addSearchId({ searchId })),
+    addTickets: ({ tickets }) => dispatch(addTickets({ tickets })),
+    changeSortByPriceFlag: ({ isSortedByPrice }) =>
+      dispatch(changeSortByPriceFlag({ isSortedByPrice })),
+    changeSortByTimeFlag: ({ isSortedByTime }) =>
+      dispatch(changeSortByTimeFlag({ isSortedByTime })),
+    addFilterBy3Transfers: ({ isFilteredByThreeTransfers }) =>
+      dispatch(addFilterBy3Transfers({ isFilteredByThreeTransfers })),
+    addFilterBy2Transfers: ({ isFilteredByTwoTransfers }) =>
+      dispatch(addFilterBy2Transfers({ isFilteredByTwoTransfers })),
+    addFilterBy1Transfer: ({ isFilteredByOneTransfer }) =>
+      dispatch(addFilterBy1Transfer({ isFilteredByOneTransfer })),
+    addFilterByAllTransfers: ({ isFilteredByAllTranfers }) =>
+      dispatch(addFilterByAllTransfers({ isFilteredByAllTranfers })),
+    addFilterByNoTransfers: ({ isFilteredByNoTransfers }) =>
+      dispatch(addFilterByNoTransfers({ isFilteredByNoTransfers })),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
