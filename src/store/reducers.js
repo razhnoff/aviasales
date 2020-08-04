@@ -43,6 +43,7 @@ const setFilterAllTransfers = (state, { isFilteredByAllTranfers }) => {
   return {
     ...state,
     isFilteredByAllTranfers: !isFilteredByAllTranfers,
+    isFilteredByNoTransfers: false,
   };
 };
 
