@@ -7,7 +7,7 @@ import {
   FILTER_NO_TRANSFERS,
   FILTER_ONE_TRANSFER,
   FILTER_TWO_TRANSFERS,
-  FILTER_THREE_TRANSFERS,
+  FILTER_THREE_TRANSFERS
 } from "../constants";
 
 const addSearchId = ({ searchId }) => {
@@ -55,5 +55,5 @@ export {
   addFilterBy2Transfers,
   addFilterBy1Transfer,
   addFilterByAllTransfers,
-  addFilterByNoTransfers,
+  addFilterByNoTransfers
 };

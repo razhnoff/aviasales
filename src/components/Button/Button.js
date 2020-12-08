@@ -5,9 +5,9 @@ import "./Button.css";
 
 export const Button = ({ type, value, onClick }) => {
   const classNames = {
-    [PRIMARY_ACTIVE]: "primary__active",
+    [PRIMARY_ACTIVE]: "primary__active"
   };
-  const className = "btn primary " + classNames[type];
+  const className = `btn primary ${classNames[type]}`;
 
   return (
     <button onClick={onClick} className={className}>
@@ -17,11 +17,11 @@ export const Button = ({ type, value, onClick }) => {
 };
 
 Button.defaultProps = {
-  type: PRIMARY,
+  type: PRIMARY
 };
 
 Button.propTypes = {
   type: PropTypes.string.isRequired,
   onClick: PropTypes.func,
-  value: PropTypes.string,
+  value: PropTypes.string
 };

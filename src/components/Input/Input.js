@@ -5,10 +5,11 @@ import "./Input.css";
 
 export const Input = ({ type, value, checked, onChange }) => {
   return (
-    <label className={"container"}>
+    // eslint-disable-next-line jsx-a11y/label-has-for
+    <label className="container">
       <input type={type} checked={checked} onChange={onChange} />
-      <span className={"checkmark"}></span>
-      <span className={"checkmark__label"}>{value}</span>
+      <span className="checkmark"></span>
+      <span className="checkmark__label">{value}</span>
     </label>
   );
 };
@@ -17,9 +18,9 @@ Input.propTypes = {
   type: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   checked: PropTypes.bool,
-  onChange: PropTypes.func,
+  onChange: PropTypes.func
 };
 
 Input.defaultProps = {
-  type: CHECKBOX,
+  type: CHECKBOX
 };

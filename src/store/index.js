@@ -8,7 +8,7 @@ import {
   FILTER_ALL_TRANSFERS,
   FILTER_ONE_TRANSFER,
   FILTER_TWO_TRANSFERS,
-  FILTER_THREE_TRANSFERS,
+  FILTER_THREE_TRANSFERS
 } from "../constants";
 import {
   setSearchId,
@@ -19,7 +19,7 @@ import {
   setFilterAllTransfers,
   setFilter1Transfer,
   setFilter2Transfers,
-  setFilter3Transfers,
+  setFilter3Transfers
 } from "./reducers";
 
 const initState = {
@@ -31,7 +31,7 @@ const initState = {
   isFilteredByAllTranfers: false,
   isFilteredByOneTransfer: false,
   isFilteredByTwoTransfers: false,
-  isFilteredByThreeTransfers: false,
+  isFilteredByThreeTransfers: false
 };
 
 export const store = createStore((state = initState, action) => {
@@ -42,31 +42,31 @@ export const store = createStore((state = initState, action) => {
       return setSearchId(state, { searchId: action.searchId });
     case TIME_SORT:
       return setIsSortedByTime(state, {
-        isSortedByTime: action.isSortedByTime,
+        isSortedByTime: action.isSortedByTime
       });
     case PRICE_SORT:
       return setIsSortedByPrice(state, {
-        isSortedByPrice: action.isSortedByPrice,
+        isSortedByPrice: action.isSortedByPrice
       });
     case FILTER_NO_TRANSFERS:
       return setFilterNoTransfers(state, {
-        isFilteredByNoTransfers: action.isFilteredByNoTransfers,
+        isFilteredByNoTransfers: action.isFilteredByNoTransfers
       });
     case FILTER_ALL_TRANSFERS:
       return setFilterAllTransfers(state, {
-        isFilteredByAllTranfers: action.isFilteredByAllTranfers,
+        isFilteredByAllTranfers: action.isFilteredByAllTranfers
       });
     case FILTER_ONE_TRANSFER:
       return setFilter1Transfer(state, {
-        isFilteredByOneTransfer: action.isFilteredByOneTransfer,
+        isFilteredByOneTransfer: action.isFilteredByOneTransfer
       });
     case FILTER_TWO_TRANSFERS:
       return setFilter2Transfers(state, {
-        isFilteredByTwoTransfers: action.isFilteredByTwoTransfers,
+        isFilteredByTwoTransfers: action.isFilteredByTwoTransfers
       });
     case FILTER_THREE_TRANSFERS:
       return setFilter3Transfers(state, {
-        isFilteredByThreeTransfers: action.isFilteredByThreeTransfers,
+        isFilteredByThreeTransfers: action.isFilteredByThreeTransfers
       });
     default:
       return state;

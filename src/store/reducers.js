@@ -1,14 +1,14 @@
 const setSearchId = (state, { searchId }) => {
   return {
     ...state,
-    searchId,
+    searchId
   };
 };
 
 const setTickets = (state, { tickets }) => {
   return {
     ...state,
-    tickets,
+    tickets
   };
 };
 
@@ -16,7 +16,7 @@ const setIsSortedByTime = (state, { isSortedByTime }) => {
   return {
     ...state,
     isSortedByTime: !isSortedByTime,
-    isSortedByPrice: false,
+    isSortedByPrice: false
   };
 };
 
@@ -24,7 +24,7 @@ const setIsSortedByPrice = (state, { isSortedByPrice }) => {
   return {
     ...state,
     isSortedByPrice: !isSortedByPrice,
-    isSortedByTime: false,
+    isSortedByTime: false
   };
 };
 
@@ -35,7 +35,7 @@ const setFilterNoTransfers = (state, { isFilteredByNoTransfers }) => {
     isFilteredByAllTranfers: false,
     isFilteredByOneTransfer: false,
     isFilteredByTwoTransfers: false,
-    isFilteredByThreeTransfers: false,
+    isFilteredByThreeTransfers: false
   };
 };
 
@@ -43,7 +43,7 @@ const setFilterAllTransfers = (state, { isFilteredByAllTranfers }) => {
   return {
     ...state,
     isFilteredByAllTranfers: !isFilteredByAllTranfers,
-    isFilteredByNoTransfers: false,
+    isFilteredByNoTransfers: false
   };
 };
 
@@ -52,7 +52,7 @@ const setFilter1Transfer = (state, { isFilteredByOneTransfer }) => {
     ...state,
     isFilteredByOneTransfer: !isFilteredByOneTransfer,
     isFilteredByNoTransfers: false,
-    isFiltredByAllTranfers: false,
+    isFiltredByAllTranfers: false
   };
 };
 
@@ -60,7 +60,7 @@ const setFilter2Transfers = (state, { isFilteredByTwoTransfers }) => {
   return {
     ...state,
     isFilteredByTwoTransfers: !isFilteredByTwoTransfers,
-    isFilteredByNoTransfers: false,
+    isFilteredByNoTransfers: false
   };
 };
 
@@ -68,7 +68,7 @@ const setFilter3Transfers = (state, { isFilteredByThreeTransfers }) => {
   return {
     ...state,
     isFilteredByThreeTransfers: !isFilteredByThreeTransfers,
-    isFilteredByNoTransfers: false,
+    isFilteredByNoTransfers: false
   };
 };
 
@@ -81,5 +81,5 @@ export {
   setFilterAllTransfers,
   setFilter1Transfer,
   setFilter2Transfers,
-  setFilter3Transfers,
+  setFilter3Transfers
 };

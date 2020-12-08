@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { Button } from "./components/Button";
 import { Input } from "./components/Input";
 import { Card } from "./components/Card";
@@ -13,7 +14,7 @@ import {
   addFilterBy2Transfers,
   addFilterBy1Transfer,
   addFilterByAllTransfers,
-  addFilterByNoTransfers,
+  addFilterByNoTransfers
 } from "./store/actions";
 import "./App.css";
 import { connect } from "react-redux";
@@ -27,9 +28,9 @@ class App extends Component {
         checked: this.props.isFilteredByAllTranfers,
         onChange: () => {
           this.props.addFilterByAllTransfers({
-            isFilteredByAllTranfers: this.props.isFilteredByAllTranfers,
+            isFilteredByAllTranfers: this.props.isFilteredByAllTranfers
           });
-        },
+        }
       },
       {
         key: "no_transfer",
@@ -37,9 +38,9 @@ class App extends Component {
         checked: this.props.isFilteredByNoTransfers,
         onChange: () => {
           this.props.addFilterByNoTransfers({
-            isFilteredByNoTransfers: this.props.isFilteredByNoTransfers,
+            isFilteredByNoTransfers: this.props.isFilteredByNoTransfers
           });
-        },
+        }
       },
       {
         key: "one_transfer",
@@ -47,9 +48,9 @@ class App extends Component {
         checked: this.props.isFilteredByOneTransfer,
         onChange: () => {
           this.props.addFilterBy1Transfer({
-            isFilteredByOneTransfer: this.props.isFilteredByOneTransfer,
+            isFilteredByOneTransfer: this.props.isFilteredByOneTransfer
           });
-        },
+        }
       },
       {
         key: "two_transfer",
@@ -57,9 +58,9 @@ class App extends Component {
         checked: this.props.isFilteredByTwoTransfers,
         onChange: () => {
           this.props.addFilterBy2Transfers({
-            isFilteredByTwoTransfers: this.props.isFilteredByTwoTransfers,
+            isFilteredByTwoTransfers: this.props.isFilteredByTwoTransfers
           });
-        },
+        }
       },
       {
         key: "three_transfer",
@@ -67,10 +68,10 @@ class App extends Component {
         checked: this.props.isFilteredByThreeTransfers,
         onChange: () => {
           this.props.addFilterBy3Transfers({
-            isFilteredByThreeTransfers: this.props.isFilteredByThreeTransfers,
+            isFilteredByThreeTransfers: this.props.isFilteredByThreeTransfers
           });
-        },
-      },
+        }
+      }
     ];
   }
 
@@ -93,8 +94,7 @@ class App extends Component {
 
   fetchAllTickets = async () => {
     try {
-      const ticketsUrl =
-        "https://front-test.beta.aviasales.ru/tickets?searchId=";
+      const ticketsUrl = "https://front-test.beta.aviasales.ru/tickets?searchId=";
       const response = await fetch(ticketsUrl + this.props.searchId);
       const { tickets } = await response.json();
       this.props.addTickets({ tickets });
@@ -110,9 +110,7 @@ class App extends Component {
 
   getFilters = () => {
     return this.filtersMeta.map(({ value, checked, onChange }, key) => {
-      return (
-        <Input key={key} value={value} onChange={onChange} checked={checked} />
-      );
+      return <Input key={key} value={value} onChange={onChange} checked={checked} />;
     });
   };
 
@@ -122,9 +120,9 @@ class App extends Component {
       value: "Самый дешевый",
       onClick: () => {
         this.props.changeSortByPriceFlag({
-          isSortedByPrice: this.props.isSortedByPrice,
+          isSortedByPrice: this.props.isSortedByPrice
         });
-      },
+      }
     };
 
     const FILTER_TIME_BTN = {
@@ -132,9 +130,9 @@ class App extends Component {
       value: "Самый быстрый",
       onClick: () => {
         this.props.changeSortByTimeFlag({
-          isSortedByTime: this.props.isSortedByTime,
+          isSortedByTime: this.props.isSortedByTime
         });
-      },
+      }
     };
 
     return [FILTER_PRICE_BTN, FILTER_TIME_BTN];
@@ -230,17 +228,18 @@ class App extends Component {
     this.updateButtonsMeta();
     return (
       <div className="App">
-        <div className={"logo"}>
-          <a href={"#"} title={"logo"}>
-            <img src={logo} alt={"logo"} />
+        <div className="logo">
+          {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+          <a href="#" title="logo">
+            <img src={logo} alt="logo" />
           </a>
         </div>
-        <div className={"mainWrapper"}>
-          <div className={"leftside"}>
-            <h1 className={"title"}>Количество пересадок</h1>
+        <div className="mainWrapper">
+          <div className="leftside">
+            <h1 className="title">Количество пересадок</h1>
             {this.getFilters()}
           </div>
-          <div className={"wrapper"}>
+          <div className="wrapper">
             {this.getFilterButtons()}
             {this.getCardViews()}
           </div>
@@ -274,7 +273,7 @@ const mapStateToProps = (state) => {
     isFilteredByAllTranfers,
     isFilteredByOneTransfer,
     isFilteredByTwoTransfers,
-    isFilteredByThreeTransfers,
+    isFilteredByThreeTransfers
   } = state;
 
   return {
@@ -286,7 +285,7 @@ const mapStateToProps = (state) => {
     isFilteredByAllTranfers,
     isFilteredByOneTransfer,
     isFilteredByTwoTransfers,
-    isFilteredByThreeTransfers,
+    isFilteredByThreeTransfers
   };
 };
 
@@ -307,8 +306,29 @@ const mapDispatchToProps = (dispatch) => {
     addFilterByAllTransfers: ({ isFilteredByAllTranfers }) =>
       dispatch(addFilterByAllTransfers({ isFilteredByAllTranfers })),
     addFilterByNoTransfers: ({ isFilteredByNoTransfers }) =>
-      dispatch(addFilterByNoTransfers({ isFilteredByNoTransfers })),
+      dispatch(addFilterByNoTransfers({ isFilteredByNoTransfers }))
   };
+};
+
+App.propTypes = {
+  isSortedByPrice: PropTypes.bool,
+  isSortedByTime: PropTypes.bool,
+  isFilteredByThreeTransfers: PropTypes.bool,
+  isFilteredByTwoTransfers: PropTypes.bool,
+  isFilteredByOneTransfer: PropTypes.bool,
+  isFilteredByAllTranfers: PropTypes.bool,
+  isFilteredByNoTransfers: PropTypes.bool,
+  addSearchId: PropTypes.func,
+  addTickets: PropTypes.func,
+  addFilterByAllTransfers: PropTypes.func,
+  addFilterBy2Transfers: PropTypes.func,
+  addFilterByNoTransfers: PropTypes.func,
+  addFilterBy1Transfer: PropTypes.func,
+  addFilterBy3Transfers: PropTypes.func,
+  changeSortByTimeFlag: PropTypes.func,
+  changeSortByPriceFlag: PropTypes.func,
+  tickets: PropTypes.array,
+  searchId: PropTypes.string
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

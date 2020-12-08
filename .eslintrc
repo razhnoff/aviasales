@@ -1,0 +1,141 @@
+{
+    "parser": "babel-eslint",
+    "plugins": [
+        "react",
+        "jsx-a11y",
+        "eslint-plugin-prettier"
+    ],
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:react-hooks/recommended",
+        "plugin:prettier/recommended",
+        "plugin:jsx-a11y/strict"
+    ],
+    "settings": {
+        "import/resolver": "webpack",
+        "import/extensions": [
+            ".js",
+            ".jsx"
+        ],
+        "react": {
+            "version": "detect"
+        }
+    },
+    "env": {
+        "browser": true,
+        "es2017": true,
+        "jest": true,
+        "node": true
+    },
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true,
+        }
+    },
+    "globals": {},
+    "rules": {
+        "quotes": [
+            "error",
+            "double"
+        ],
+        "comma-dangle": [
+            "error",
+            "only-multiline"
+        ],
+        "comma-spacing": [
+            "error",
+            {
+                "after": true
+            }
+        ],
+        "comma-style": [
+            "error",
+            "last"
+        ],
+        "eqeqeq": [
+            "error",
+            "always"
+        ],
+        "jsx-quotes": [
+            "error",
+            "prefer-double"
+        ],
+        "max-len": [
+            "error",
+            100
+        ],
+        "quote-props": [
+            "error",
+            "as-needed"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ],
+        "array-bracket-spacing": "error",
+        "block-spacing": [
+            "error",
+            "never"
+        ],
+        "brace-style": "error",
+        "camelcase": "error",
+        "arrow-parens": [
+            "error",
+            "always"
+        ],
+        "prefer-const": "error",
+        "prefer-destructuring": "error",
+        "prefer-template": "error",
+        "no-unused-vars": [
+            "error",
+            {
+                "ignoreRestSiblings": true
+            }
+        ],
+        "no-duplicate-imports": "error",
+        "no-multi-spaces": "error",
+        "no-console": [
+            "error",
+            {
+                "allow": [
+                    "info",
+                    "error"
+                ]
+            }
+        ],
+        "no-constructor-return": "error",
+        "no-else-return": "error",
+        "no-eval": "error",
+        "no-implied-eval": "error",
+        "no-useless-concat": "error",
+        "no-lonely-if": "error",
+        "no-multiple-empty-lines": "error",
+        "no-trailing-spaces": "error",
+        "no-unneeded-ternary": "error",
+        "no-restricted-imports": "error",
+        "no-useless-constructor": "error",
+        "no-var": "error",
+        "template-tag-spacing": [
+            "error",
+            "always"
+        ],
+        "object-curly-spacing": [
+            "error",
+            "always"
+        ],
+        "prettier/prettier": [
+            "error",
+            {
+                "singleQuote": false,
+                "printWidth": 100,
+                "tabWidth": 2,
+                "semi": true,
+                "trailingComma": "none",
+                "jsxBracketSameLine": true,
+                "arrow-parens": "always",
+                "endOfLine": "auto"
+            }
+        ]
+    }
+}

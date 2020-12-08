@@ -6,7 +6,7 @@ export class Card extends Component {
   getTimeByKey = (timestamp, key) => {
     const options = {
       minutes: new Date(timestamp).getMinutes(),
-      hours: new Date(timestamp).getHours(),
+      hours: new Date(timestamp).getHours()
     };
 
     const value = options[key];
@@ -26,10 +26,7 @@ export class Card extends Component {
   };
 
   getAllTime = (timestamp) => {
-    return `${this.getTimeByKey(timestamp, "hours")}:${this.getTimeByKey(
-      timestamp,
-      "minutes"
-    )}`;
+    return `${this.getTimeByKey(timestamp, "hours")}:${this.getTimeByKey(timestamp, "minutes")}`;
   };
 
   getDestinationTime = ({ date, duration }) => {
@@ -40,32 +37,28 @@ export class Card extends Component {
   };
 
   getCardRows = ({ segments }) => {
-    return segments.map(
-      ({ date, destination, duration, origin, stops }, key) => {
-        const destinationTime = this.getDestinationTime({ date, duration });
+    return segments.map(({ date, destination, duration, origin, stops }, key) => {
+      const destinationTime = this.getDestinationTime({ date, duration });
 
-        return (
-          <div key={key} className={"row"}>
-            <div className={"row_titles"}>
-              <span className={"col_title"}>
-                {origin} – {destination}
-              </span>
-              <span className={"col_title"}>В пути</span>
-              <span className={"col_title"}>
-                {this.getTransfersTitle(stops)}
-              </span>
-            </div>
-            <div className={"row_data"}>
-              <span className={"col_data"}>
-                {this.getAllTime(date)} – {this.getAllTime(destinationTime)}
-              </span>
-              <span className={"col_data"}>{this.getDuration(duration)}</span>
-              <span className={"col_data"}>{this.getTransfersData(stops)}</span>
-            </div>
+      return (
+        <div key={key} className="row">
+          <div className="row_titles">
+            <span className="col_title">
+              {origin} – {destination}
+            </span>
+            <span className="col_title">В пути</span>
+            <span className="col_title">{this.getTransfersTitle(stops)}</span>
           </div>
-        );
-      }
-    );
+          <div className="row_data">
+            <span className="col_data">
+              {this.getAllTime(date)} – {this.getAllTime(destinationTime)}
+            </span>
+            <span className="col_data">{this.getDuration(duration)}</span>
+            <span className="col_data">{this.getTransfersData(stops)}</span>
+          </div>
+        </div>
+      );
+    });
   };
 
   getTransfersData = (transfers) => {
@@ -88,21 +81,16 @@ export class Card extends Component {
 
   render() {
     const { price, carrier: code, segments } = this.props;
-    
+
     return (
-      <div className={"card_container"}>
-        <div className={"main_info"}>
-          <span className={"price"}>{price} P</span>
-          <div className={"company_logo"}>
-            <img
-              src={`https://pics.avs.io/99/36/${code}.png`}
-              alt={"company logo"}
-            />
+      <div className="card_container">
+        <div className="main_info">
+          <span className="price">{price} P</span>
+          <div className="company_logo">
+            <img src={`https://pics.avs.io/99/36/${code}.png`} alt="company logo" />
           </div>
         </div>
-        <div className={"additional_info"}>
-          {this.getCardRows({ segments })}
-        </div>
+        <div className="additional_info">{this.getCardRows({ segments })}</div>
       </div>
     );
   }
@@ -110,4 +98,6 @@ export class Card extends Component {
 
 Card.propTypes = {
   price: PropTypes.number,
+  carrier: PropTypes.string,
+  segments: PropTypes.array
 };
