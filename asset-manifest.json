@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/static/css/main.505b6321.chunk.css",
-    "main.js": "/static/js/main.5592c5de.chunk.js",
-    "main.js.map": "/static/js/main.5592c5de.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.b2fa1274.js",
-    "runtime-main.js.map": "/static/js/runtime-main.b2fa1274.js.map",
-    "static/js/2.be3e2a53.chunk.js": "/static/js/2.be3e2a53.chunk.js",
-    "static/js/2.be3e2a53.chunk.js.map": "/static/js/2.be3e2a53.chunk.js.map",
-    "index.html": "/index.html",
-    "precache-manifest.12cceb03ff95a12dd2ecd6a8636ee277.js": "/precache-manifest.12cceb03ff95a12dd2ecd6a8636ee277.js",
-    "service-worker.js": "/service-worker.js",
-    "static/css/main.505b6321.chunk.css.map": "/static/css/main.505b6321.chunk.css.map",
-    "static/js/2.be3e2a53.chunk.js.LICENSE.txt": "/static/js/2.be3e2a53.chunk.js.LICENSE.txt"
+    "main.css": "/aviasales/static/css/main.505b6321.chunk.css",
+    "main.js": "/aviasales/static/js/main.5592c5de.chunk.js",
+    "main.js.map": "/aviasales/static/js/main.5592c5de.chunk.js.map",
+    "runtime-main.js": "/aviasales/static/js/runtime-main.b4f11597.js",
+    "runtime-main.js.map": "/aviasales/static/js/runtime-main.b4f11597.js.map",
+    "static/js/2.be3e2a53.chunk.js": "/aviasales/static/js/2.be3e2a53.chunk.js",
+    "static/js/2.be3e2a53.chunk.js.map": "/aviasales/static/js/2.be3e2a53.chunk.js.map",
+    "index.html": "/aviasales/index.html",
+    "precache-manifest.64fb83863f4e228b27f1a214204565a6.js": "/aviasales/precache-manifest.64fb83863f4e228b27f1a214204565a6.js",
+    "service-worker.js": "/aviasales/service-worker.js",
+    "static/css/main.505b6321.chunk.css.map": "/aviasales/static/css/main.505b6321.chunk.css.map",
+    "static/js/2.be3e2a53.chunk.js.LICENSE.txt": "/aviasales/static/js/2.be3e2a53.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.b2fa1274.js",
+    "static/js/runtime-main.b4f11597.js",
     "static/js/2.be3e2a53.chunk.js",
     "static/css/main.505b6321.chunk.css",
     "static/js/main.5592c5de.chunk.js"
